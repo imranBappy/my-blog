@@ -52,3 +52,7 @@ footer {
     right: 0;
     position: absolute;
 }
+
+.post-body img{
+    width:100%
+}
