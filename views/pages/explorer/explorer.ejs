@@ -1,0 +1,115 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <section class="my-4 px-3">
+                    <a href="/explorer/?filter=latest"
+                        class="btn <%= filter==='latest' ? 'btn-primary' : 'btn-secondary' %> ">
+                        Latest
+                    </a>
+
+                    <a href="/explorer/?filter=week"
+                        class="btn <%= filter==='week' ? 'btn-primary' : 'btn-secondary' %> ">
+                        Week
+                    </a>
+
+                    <a href="/explorer/?filter=month"
+                        class="btn <%= filter==='month' ? 'btn-primary' : 'btn-secondary' %> ">
+                        Month
+                    </a>
+
+                    <a href="/explorer/?filter=all"
+                        class="btn <%= filter==='all' ? 'btn-primary' : 'btn-secondary' %> ">
+                        All
+                    </a>
+
+                </section>
+                <section>
+                    <% if(posts.length===0 ){ %>
+                        <p class="text-center text-muted"> There Is Nothing To Show</p>
+                        <% }else{ %>
+                            <% for(let post of posts){ %>
+                                <div class="cord card-body mb-5">
+                                    <% if(post.thumbnail){ %>
+
+                                        <img class="img-fluid mb-2" src="<%= post.thumbnail%>" alt="thumbnail">
+                                        <% } %>
+                                            <a href="/explorer/<%= post._id %>"
+                                                style="color:#222; text-decoration:none;">
+                                                <h5>
+                                                    <%= post.title %>
+                                                </h5>
+                                                <p class="mb-4">
+                                                    <%= truncate(post.body) %>
+                                                </p>
+                                            </a>
+                                            <div class="bookmark-container">
+                                                <small class="bookmark-left">
+                                                    <%= moment(post.createdAt ) %>,
+                                                        Posted By <a class="link"
+                                                            href="/user/<%= post.author.username %>">
+                                                            <%= post.author.username %>
+                                                        </a>
+                                                        Read Time <%= post.readTime %>
+                                                </small>
+                                                <% if(user){ %>
+
+                                                    <span class="bookmark bookmark-right" data-post="<%= post._id %>">
+                                                        <% if(bookmarks.includes(post._id)){ %>
+
+                                                            <i class="fas fa-bookmark"></i>
+
+                                                            <% }else{ %>
+                                                                <i style="margin-left: 13%;"
+                                                                    class=" ml-auto  far fa-bookmark"></i>
+                                                                <%}%>
+                                                    </span>
+                                                    <% } %>
+                                            </div>
+                                </div>
+
+                                <% } %>
+                                    <% } %>
+                </section>
+                <% if(totalPage> 1){ %>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+
+                            <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                                <a aria-label="Previous" class="page-link"
+                                    href="<%= `/explorer/?filter=${filter}&page=${currentPage - 1}` %>">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+
+                            <% for(let i=1; i <=totalPage; i++) { %>
+
+                                <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                                    <a class="page-link" href="<%= `/explorer/?filter=${filter}&page=${i}` %>">
+                                        <%= i %>
+                                    </a>
+                                </li>
+
+                                <% } %>
+
+
+                                    <li class="page-item <%= currentPage === 1 ? 'active' : '' %>">
+                                        <a class="page-link" aria-label="Next"
+                                            href="<%= `/explorer/?filter=${filter}&page=${currentPage + 1}` %>">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                        </ul>
+                    </nav>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../../partials/footer.ejs') %>
+        <script src="/scripts/bookmarks.js"></script>
+        </body>
+
+        </html>

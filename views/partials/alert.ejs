@@ -1,0 +1,17 @@
+<div class="my-2">
+    <% if (flashMessages.success){ %>
+        <div role="alert" class="alert alert-success alert-dismissible fade show my-3">
+            <%= flashMessages.success %>
+                <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <% } %>
+            <% if (flashMessages.fail){ %>
+                <div role="alert" class="alert alert-danger alert-dismissible fade show my-3">
+                    <%= flashMessages.fail %>
+                        <button class="btn-close close" data-dismiss="alert" aria-label="Close">
+
+                        </button>
+                </div>
+                <% } %>
+</div>

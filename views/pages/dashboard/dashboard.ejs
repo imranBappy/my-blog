@@ -1,0 +1,74 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %>
+            </div>
+            <div class="col-md-10">
+                <div class="col-md-8 offset-md-2">
+                    <div class="row ">
+                        <h5>My Recent Created Posts</h5>
+
+                        <% if( posts.length===0 ){%>
+                            <div class="text-center text-muted">
+                                <p>There is no posts available right now</p>
+                            </div>
+                            <% } else { %>
+                                <% for(let post of posts){ %>
+                                    <div class="card card-body col-sm-3 m-4">
+                                        <% if( post.thumbnail ){%>
+                                            <img class='card-img-top mt-3' src="<%= post.thumbnail %>"
+                                                alt="Post thumbnail">
+                                            <% } %>
+                                                <div class="card-body">
+                                                    <a style="color:#222; text-decoration:dashed;"
+                                                        href="/explorer/<%= post._id %>">
+                                                        <h6>
+                                                            <%= post.title %>
+                                                        </h6>
+                                                    </a>
+                                                </div>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+                    </div>
+
+
+                    <div class="row ">
+                        <h5>My Recent Created Bookmarks</h5>
+
+                        <% if( bookmarks.length===0 ){%>
+                            <div class="text-center text-muted">
+                                <p>There is no bookmarks available right now</p>
+                            </div>
+                            <% } else { %>
+                                <% for(let post of bookmarks){ %>
+                                    <div class="card card-body col-sm-3 m-4">
+                                        <% if( post.thumbnail ){%>
+                                            <img class='card-img-top mt-3' src="<%= post.thumbnail %>"
+                                                alt="Post thumbnail">
+                                            <% } %>
+                                                <div class="card-body">
+                                                    <a style="color:#222; text-decoration:dashed;"
+                                                        href="/explorer/<%= post._id %>">
+                                                        <h6>
+                                                            <%= post.title %>
+                                                        </h6>
+                                                    </a>
+                                                </div>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <%- include('../../partials/footer.ejs') %>
+        </body>
+
+        </html>

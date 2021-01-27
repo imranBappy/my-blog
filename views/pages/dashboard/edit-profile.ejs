@@ -1,0 +1,143 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %>
+            </div>
+            <div class="col-md-10">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card card-body my-5">
+                        <h4>
+                            <%= title %>
+                        </h4>
+                        <div class="profile-pics">
+                            <div style="width:200px; height: 200px;">
+                                <img style="width:100% ; height: 100%;" src=" <%= user.profilePics %>" alt="profilePics"
+                                    class="img-thumbnail img-fluid" id="profilePics">
+                            </div>
+
+                            <form action="/uploads/profilePics" method="POST" enctype="multipart/form-data" class="my-3"
+                                id="profilePicsFrom">
+                                <input type="file" class="form-control my-3" name="profilePics" id="profilePicsFile"
+                                    accept="image/*">
+                                <input type="submit" value="Update" class="btn btn-danger btn-sm my-2"
+                                    id="uploadProfilePics">
+                                <a class="btn btn-danger btn-sm my-2" href="/dashboard/profile" id="remove-profilePics">
+                                    Delete</a>
+
+                            </form>
+
+                        </div>
+                        <div>
+                            <form action="/dashboard/edit-profile" method="POST">
+                                <div class="form-group my-3">
+                                    <label for="name">Enter Your Name</label>
+                                    <input type="text" class="form-control <%= errors.name ? 'is-invalid':'' %>"
+                                        name="name" placeholder="Enter Your Name" id="name" value="<%= profile.name %>">
+                                    <div class="invalid-feedback">
+                                        <%= errors.name %>
+                                    </div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="email">Enter Your Email</label>
+                                    <input disabled value="<%= user.email %>" type="email" class="form-control"
+                                        name="email" placeholder="Enter Your Email" id="name">
+                                </div>
+
+                                <div class="form-group my-3">
+                                    <label for="title">Enter A Short Title</label>
+                                    <input type="text" value="<%= profile.title %>"
+                                        class="form-control <%= errors.title ? 'is-invalid':'' %>" name="title"
+                                        placeholder="A Short Title" id="title">
+                                    <div class="invalid-feedback">
+                                        <%= errors.title %>
+                                    </div>
+                                </div>
+
+                                <div class="form-group  my-3">
+                                    <label for="bio">Enter A Short Bio</label>
+                                    <textarea class="form-control <%= errors.bio ? 'is-invalid':'' %>" name="bio"
+                                        id="bio" cols="30" rows="5"><%= profile.bio %></textarea>
+                                    <div class="invalid-feedback">
+                                        <%= errors.bio %>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="lead my-3"> Enter Your Social Link</p>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i style="font-size:25px" class="fab fa-internet-explorer"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" value="<%= profile.links.website %>"
+                                            class="form-control <%= errors.website ? 'is-invalid':'' %>"
+                                            placeholder="Website Link" name="website">
+                                        <div class="invalid-feedback">
+                                            <%= errors.website %>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i style="font-size:25px" class="fab fa-facebook-square"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" value="<%= profile.links.facebook %>"
+                                            class="form-control <%= errors.facebook ? 'is-invalid':'' %>"
+                                            placeholder="Facebook Link" name="facebook">
+                                        <div class="invalid-feedback">
+                                            <%= errors.facebook %>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i style="font-size:25px" class="fab fa-twitter-square"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" value="<%= profile.links.twitter %>"
+                                            class="form-control <%= errors.twitter ? 'is-invalid':'' %>"
+                                            placeholder="Twitter Link" name="twitter">
+                                        <div class="invalid-feedback">
+                                            <%= errors.twitter %>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i style="font-size:25px" class="fab fa-github-square"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" value="<%= profile.links.github %>"
+                                            class="form-control <%= errors.github ? 'is-invalid':'' %>"
+                                            placeholder="Github Link" name="github">
+                                        <div class="invalid-feedback">
+                                            <%= errors.github %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input class="btn btn-success btn-sm my-2" value="Update Profile" type="submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../../partials/footer.ejs') %>
+
+        <script>
+
+
+
+
+        </script>
+        <script src="/scripts/profilePicUpload.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        </body>
+
+        </html>

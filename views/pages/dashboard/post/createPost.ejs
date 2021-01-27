@@ -1,0 +1,63 @@
+<%- include('../../../partials/header.ejs') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %>
+            </div>
+            <div class="col-md-10 my-5">
+                <div class=" card card-body">
+                    <h5 class="pt-4 text-center">
+                        <%= title %>
+                    </h5>
+                    <form action="/posts/create" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Enter Your Title</label>
+                            <input value="<%= value.title ? value.title : '' %>" type="text" name="title" id="title"
+                                class="form-control <%= errors.title ? 'is-invalid' : '' %> ">
+                            <div class="invalid-feedback">
+                                <%= errors.title ? errors.title : '' %>
+                            </div>
+                        </div>
+
+                        <div class="input-group my-5">
+
+                            <textarea placeholder="Enter Your Post Body" style="width:100%" id="tiny-mce-post-body"
+                                name="body" class="form-control <%= errors.body ? 'is-invalid' : '' %> " rows="10"
+                                cols="20">
+                                <%- value.body ? value.body : '' %>
+                            </textarea>
+                            <div class="invalid-feedback">
+                                <%= errors.body %>
+                            </div>
+                        </div>
+
+                        <div class="form-group py-4">
+                            <label for="tags">Enter Some Post Tags (Max 10)</label>
+                            <input value="<%= value.tags ? value.tags : '' %>" placeholder="tag1, tag2, tag3"
+                                type="text" name="tags" id="tags" class="form-control">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input type="file" name="post-thumbnail" class="form-control" id="inputGroupFile">
+                            <label class="input-group-text" for="inputGroupFile">Upload</label>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Create Post" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../../../partials/footer.ejs') %>
+        <script src="https://cdn.tiny.cloud/1/5n3w9f277isevbha0arvck3cqrnniuydttr8e5t1tx439adj/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
+        <script src="/scripts/tinymce.js"></script>
+        <script>
+            $('#inputGroupFile').on('change', function (e) {
+                let filename = e.target.files[0].name
+                $(this).next('.custom-file-label').html(filename)
+            })
+        </script>
+        </body>
+
+        </html>

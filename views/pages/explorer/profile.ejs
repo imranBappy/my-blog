@@ -1,0 +1,103 @@
+<%- include('../../partials/header.ejs') %>
+
+    <div class="container">
+
+        <div class="profile">
+            <div class="text-center">
+                <img class="rounded-circle my-2 border border-dark profile-pic" src="<%= profile.profilePics %>">
+                <h3 class="my-2">
+                    <%= profile.name %>
+                </h3>
+                <p class="my-3">
+                    <span class="border-bottom py-2">
+                        <%= profile.title %>
+                    </span>
+                </p>
+                <p class="text-muted text-justify my-4">
+                    <i style="width: 500px; margin: 0 auto">
+                        <%= profile.bio %>
+                    </i>
+                </p>
+                <div class="links">
+                    <% if(profile.links.website){ %>
+                        <a class="link" target='blank' href="<%= profile.links.website %>">
+                            <i class="fab fa-internet-explorer icon"></i>
+                        </a>
+
+                        <% } %>
+                            <% if(profile.links.facebook){ %>
+                                <a class="link" target='blank' href="<%= profile.links.facebook %>">
+                                    <i class="fab fa-facebook-square icon"></i>
+                                </a>
+                                <% } %>
+                                    <% if(profile.links.twitter){ %>
+                                        <a class="link" target='blank' href="<%= profile.links.twitter %>">
+                                            <i class="fab fa-twitter-square icon"></i>
+                                        </a>
+                                        <% } %>
+                                            <% if(profile.links.twitter){ %>
+                                                <a class="link" target='blank' href="<%= profile.links.github %>">
+                                                    <i class="fab fa-github-square icon"></i>
+                                                </a>
+                                                <% } %>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="all-post ">
+            <div class="row">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-6">
+
+
+
+                    <div class=" my-3 card-body">
+                        <h5 class=" my-3">Post Created By <%= profile.name %>
+                        </h5>
+                        <div class="row ">
+                            <% if( profile.posts.length===0 ){%>
+                                <div class="text-center text-muted">
+                                    <p>There is no posts available right now</p>
+                                    <a href="/posts/create" class="btn btn-primary btn-sm ">Create Post Now</a>
+                                </div>
+                                <% } else { %>
+                                    <% for(let post of profile.posts.reverse()){ %>
+                                        <div class="card my-4">
+                                            <% if( post.thumbnail ){%>
+                                                <img class='card-img-top mt-3' src="<%= post.thumbnail %>"
+                                                    alt="Post thumbnail">
+                                                <% } %>
+                                                    <div class="card-body">
+                                                        <a style="color:#222; text-decoration:dashed;"
+                                                            href="/posts/edit/<%= post._id %>">
+                                                            <h6>
+                                                                <%= post.title %>
+                                                            </h6>
+                                                        </a>
+                                                    </div>
+                                        </div>
+                                        <% } %>
+                                            <% } %>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <%- include('../../partials/footer.ejs') %>
+        <script src="/scripts/bookmarks.js"></script>
+        </body>
+
+        </html>
