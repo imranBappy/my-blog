@@ -10,6 +10,7 @@ const chalk = require('chalk');
 const url = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.um5ig.mongodb.net/my_blog_info?retryWrites=true&w=majority`;
 const app = express();
 // setup view Engine
+app.use(express.static(__dirname + '../public'));
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 // all routes from Middleware direcory
