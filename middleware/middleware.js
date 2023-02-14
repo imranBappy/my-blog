@@ -7,7 +7,8 @@ const flash = require('connect-flash');
 const config = require('config');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-const url = `mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@cluster0.um5ig.mongodb.net/my_blog_info?retryWrites=true&w=majority`;
+const url = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.um5ig.mongodb.net/my_blog_info?retryWrites=true&w=majority`;
+
 var store = new MongoDBStore({
     uri: url,
     collection: 'sessions',
