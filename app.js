@@ -5,7 +5,7 @@ const config = require('config');
 const setMiddleware = require('./middleware/middleware');
 const setRoutes = require('./routes/routes')
 const chalk = require('chalk');
-
+console.log(config.get('name'));
 // Database user from mongodb
 const url = `mongodb+srv://${config.get('db-username')}:${config.get('db-password')}@cluster0.um5ig.mongodb.net/my_blog_info?retryWrites=true&w=majority`;
 const app = express();
